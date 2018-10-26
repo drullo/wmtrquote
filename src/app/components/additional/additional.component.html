@@ -42,7 +42,9 @@
     <!-- Other -->
     <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
       <span matPrefix *ngIf="quoteService.outlineFields && hasValue('other')">Other Considerations</span>
-      <textarea matInput placeholder="Other Considerations" formControlName="other"></textarea>
+      <textarea matInput placeholder="Other Considerations" formControlName="other"
+        [class.focused]="otherFocused"
+        (focus)="otherFocused = true" (blur)="otherFocused = false"></textarea>
     </mat-form-field>
   </form>
 

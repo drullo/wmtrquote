@@ -24,6 +24,7 @@ export class AdditionalComponent implements OnInit {
   reps: string[];
   filteredReferrals: Observable<string[]>;
   filteredReps: Observable<string[]>;
+  otherFocused = false; // used to dynamically expand the height when focused
   //#endregion
 
   //#region Properties
