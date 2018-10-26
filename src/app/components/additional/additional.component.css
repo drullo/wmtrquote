@@ -1,0 +1,22 @@
+#referral, #rep {
+  display: grid;
+  grid-template-columns: 1fr 0; /* So the autocomplete doesn't take up have of the space */
+}
+
+.file {
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: auto 1fr;
+}
+
+.file mat-icon {
+  cursor: pointer;
+}
+
+@media (min-width:801px) {
+  #referral-time {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: 1fr 1fr;
+  }
+}

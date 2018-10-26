@@ -1,0 +1,22 @@
+#csz > div {
+  display: grid;
+  grid-template-columns: 1fr 0; /* So the autocomplete doesn't take up have of the space */
+}
+
+@media (min-width:801px) {
+  #dude, #csz, #digits {
+    grid-gap: 2em;
+  }
+
+  #dude{
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #csz {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  #digits {
+    grid-template-columns: 1fr 1fr;
+  }
+}

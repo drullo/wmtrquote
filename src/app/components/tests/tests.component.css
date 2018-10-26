@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+}
+
+.icon {
+  width: 1em;
+}
+
+.icon mat-icon {
+  cursor: pointer;
+}
+
+td:first-of-type {
+  padding-left: .5em !important;
+}
+
+.hidden-mobile {
+  display: none;
+}
+
+@media (min-width:801px) {
+  .hidden-mobile {
+    display: table-cell;
+  }
+}

@@ -1,0 +1,17 @@
+#wrapper {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+  grid-gap: 2em;
+  margin-top: 1em;
+}
+
+#wrapper > div:first-child {
+  font-size: 2em;
+}
+
+#wrapper > div:last-child {
+  color: #757575;
+  font-style: italic;
+}

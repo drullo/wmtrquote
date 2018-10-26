@@ -1,0 +1,104 @@
+<div id="wrapper">
+  <form [formGroup]="form">
+    <div id="dude">
+    <!-- Company -->
+      <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+        <span matPrefix *ngIf="quoteService.outlineFields && hasValue('company')">Company / Organization</span>
+        <input matInput placeholder="Company / Organization" formControlName="company" />
+      </mat-form-field>
+
+      <!-- Contact -->
+      <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+          <span matPrefix *ngIf="quoteService.outlineFields && hasValue('contact')">Contact Name</span>
+        <input matInput placeholder="Contact Name" formControlName="contact" />
+      </mat-form-field>
+
+      <!-- Title -->
+      <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+          <span matPrefix *ngIf="quoteService.outlineFields && hasValue('title')">Title</span>
+        <input matInput placeholder="Title" formControlName="title" />
+      </mat-form-field>
+    </div>
+
+    <!-- Address -->
+    <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+      <span matPrefix *ngIf="quoteService.outlineFields && hasValue('address')">Address</span>
+      <textarea matInput placeholder="Address" formControlName="address"
+        [class.focused]="addressFocused"
+        (focus)="addressFocused = true" (blur)="addressFocused = false"></textarea>
+    </mat-form-field>
+
+    <div id="csz">
+      <div>
+        <!-- City -->
+        <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+          <span matPrefix *ngIf="quoteService.outlineFields && hasValue('city')">City</span>
+          <input matInput placeholder="City" formControlName="city" [matAutocomplete]="autoCity" />
+        </mat-form-field>
+        <!-- Autocomplete for City -->
+        <mat-autocomplete #autoCity="matAutocomplete">
+          <mat-option *ngFor="let city of filteredCities | async" [value]="city">
+            {{ city }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+
+      <div>
+        <!-- State -->
+        <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+          <span matPrefix *ngIf="quoteService.outlineFields && hasValue('state')">State</span>
+          <input matInput placeholder="State" formControlName="state" [matAutocomplete]="autoState" />
+        </mat-form-field>
+        <!-- Autocomplete for State -->
+        <mat-autocomplete #autoState="matAutocomplete">
+          <mat-option *ngFor="let state of filteredStates | async" [value]="state">
+            {{ state }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+
+      <!-- Zip -->
+      <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+        <span matPrefix *ngIf="quoteService.outlineFields && hasValue('zip')">Zipcode</span>
+        <input matInput placeholder="Zipcode" formControlName="zip" />
+      </mat-form-field>
+
+      <!-- Country -->
+      <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+        <span matPrefix *ngIf="quoteService.outlineFields && hasValue('country')">Country</span>
+        <mat-select formControlName="country">
+          <mat-option *ngFor="let country of countries" [value]="country">
+            {{ country.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div id="digits">
+      <!-- Phone -->
+      <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+        <span matPrefix>+1 &nbsp;</span>
+        <input matInput type="tel" placeholder="Phone Number" formControlName="phone" />
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+        <span matPrefix *ngIf="quoteService.outlineFields && hasValue('email')">Email Address</span>
+        <input matInput placeholder="Email Address" formControlName="email" [errorStateMatcher]="matcher" />
+        <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
+          Please enter a valid email address
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <div id="buttons">
+    <button mat-raised-button color="primary" [disabled]="!form.valid" routerLink="/tests">
+      <mat-icon>settings</mat-icon>
+      <div>
+        <span class="large">Proceed to Test Information</span>
+        <span class="small">Next</span>
+      </div>
+    </button>
+  </div>
+</div>

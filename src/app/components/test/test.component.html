@@ -1,0 +1,123 @@
+<div id="wrapper" *ngIf="form">
+  <form [formGroup]="form">
+    <!-- Test type -->
+    <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+      <span matPrefix *ngIf="quoteService.outlineFields && hasValue('type')">Test Type</span>
+      <input matInput placeholder="Test Type" formControlName="type">
+      <mat-hint>example: 'Tinsile'</mat-hint>
+    </mat-form-field>
+
+    <!-- Machining? -->
+    <div id="machine-test" [class.border]="quoteService.outlineFields">
+      <label>
+        Do you Require WMT&amp;R to Machine the Samples for this test?
+      </label>
+
+      <mat-radio-group formControlName="machineTest">
+        <mat-radio-button value="Yes">Yes</mat-radio-button>
+        <mat-radio-button value="No">No</mat-radio-button>
+        <mat-radio-button value="Machine Only">Machine Only</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div id="delivery-stuff" *ngIf="machineTest">
+      <!-- Delivery form -->
+      <div id="delivery-form">
+        <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+          <span matPrefix *ngIf="quoteService.outlineFields && hasValue('materialDelivery')">Material Delivery Form</span>
+          <input matInput placeholder="Material Delivery Form" formControlName="materialDelivery" [matAutocomplete]="autoDelivery" />
+        </mat-form-field>
+
+        <!-- Autocomplete for Material Delivery Form -->
+        <mat-autocomplete #autoDelivery="matAutocomplete">
+          <mat-option *ngFor="let delivery of filteredDeliveryOptions | async" [value]="delivery">
+            {{ delivery }}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+
+      <!-- Delivery dimmensions -->
+      <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+        <span matPrefix *ngIf="quoteService.outlineFields && hasValue('materialDimmensions')">Dimmensions</span>
+        <input matInput placeholder="Dimmensions" formControlName="materialDimmensions" />
+        <mat-hint>Width, Length, and Depth</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div id="material">
+      <!-- Material -->
+      <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+        <span matPrefix *ngIf="quoteService.outlineFields && hasValue('material')">Material</span>
+        <input matInput placeholder="Material" formControlName="material" />
+        <mat-hint>example: 'Aluminum'</mat-hint>
+      </mat-form-field>
+
+      <!-- Material hardness -->
+      <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+        <span matPrefix *ngIf="quoteService.outlineFields && hasValue('hardness')">Material Hardness</span>
+        <input matInput placeholder="Material Hardness" formControlName="hardness" />
+        <mat-hint>examples: '80 HBR', '150 BH'</mat-hint>
+      </mat-form-field>
+    </div>
+
+    <div id="samples-temp">
+      <!-- Samples -->
+      <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+        <span matPrefix *ngIf="quoteService.outlineFields && hasValue('samples')">Number of Samples</span>
+        <input matInput type="number" placeholder="Number of Samples" formControlName="samples" />
+      </mat-form-field>
+
+      <div id="temp">
+        <!-- Temperature -->
+        <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+          <span matPrefix *ngIf="quoteService.outlineFields && hasValue('temp')">Temperature</span>
+          <input matInput placeholder="Temperature" formControlName="temp" />
+          <mat-hint>example: 'Aluminum'</mat-hint>
+        </mat-form-field>
+
+        <mat-radio-group formControlName="tempScale">
+          <mat-radio-button value="F">°F</mat-radio-button>
+          <mat-radio-button value="C">°C</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    
+    <!-- Specification -->
+    <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+      <span matPrefix *ngIf="quoteService.outlineFields && hasValue('specification')">Specification</span>
+      <textarea matInput placeholder="Specification" formControlName="specification"
+        [class.focused]="specificationFocused"
+        (focus)="specificationFocused = true" (blur)="specificationFocused = false">
+      </textarea>
+      <mat-hint>example: 'ASTM2345'</mat-hint>
+    </mat-form-field>
+
+    <!-- Additional info -->
+    <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
+      <span matPrefix *ngIf="quoteService.outlineFields && hasValue('additionalInfo')">Additional Info</span>
+      <textarea matInput placeholder="Additional Info" formControlName="additionalInfo"
+        [class.focused]="additionalFocused"
+        (focus)="additionalFocused = true" (blur)="additionalFocused = false">
+      </textarea>
+      <mat-hint>Additional conditions for the test, etc.</mat-hint>
+    </mat-form-field>
+  </form>
+
+  <div id="buttons">
+    <button mat-raised-button routerLink="/contact" (click)="ditchInvalid()">
+      <mat-icon>assignment</mat-icon>
+      <div>
+        <span class="large">Edit Contact Information</span>
+        <span class="small">Contact Info</span>
+      </div>
+    </button>
+
+    <button mat-raised-button color="primary" [disabled]="!form.valid" routerLink="/tests">
+      <mat-icon>settings</mat-icon>
+      <div>
+        <span class="large">Proceed</span>
+        <span class="small">Next</span>
+      </div>
+    </button>
+  </div>
+</div>

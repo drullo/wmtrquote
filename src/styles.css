@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~ngx-toastr/toastr.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+#wrapper {
+  padding: 1em;
+}
+
+#buttons {
+  margin-top: 1em;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 1em;
+  justify-content: end;
+}
+
+#buttons span.large {
+  display: none;
+}
+
+.mat-button-wrapper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 1em;
+  height: 4em;
+  align-items: center;
+}
+
+a, a:visited, a:active {
+  color: #394fc8;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #ca8a12;
+}
+
+@media (min-width:801px) {
+  #buttons span.large {
+    display: block;
+  }
+
+  #buttons span.small {
+    display: none;
+  }
+}

@@ -1,0 +1,55 @@
+<div id="wrapper">
+
+  <table mat-table [dataSource]="dataSource">
+    <ng-container *ngFor="let col of displayedColumns" [matColumnDef]="col">
+      <th mat-header-cell *matHeaderCellDef
+        [class.icon]="isIcon(col)"
+        [class.hidden-mobile]="isHiddenMobile(col)">
+        
+        <span *ngIf="!isIcon(col)">
+          {{ caption(col) }}
+        </span>
+      </th>
+
+      <td mat-cell *matCellDef="let test"
+        [class.icon]="isIcon(col)"
+        [class.hidden-mobile]="isHiddenMobile(col)">
+
+        <mat-icon *ngIf="isIcon(col)" (click)="editDelete(col, test)"
+          [matTooltip]="col === 'delete' ? 'Delete this test' : 'Edit this test'">
+          {{ value(col) }}
+        </mat-icon>
+        
+        <span *ngIf="!isIcon(col)">
+          {{ value(col, test) }}
+        </span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let test; columns: displayedColumns;"></tr>
+  </table>
+
+  <button mat-button routerLink="/test">
+    <mat-icon>add</mat-icon>
+    Add Another Test
+  </button>
+
+  <div id="buttons">
+    <button mat-raised-button routerLink="/contact">
+      <mat-icon>assignment</mat-icon>
+      <div>
+        <span class="large">Edit Contact Information</span>
+        <span class="small">Contact Info</span>
+      </div>
+    </button>
+    
+    <button mat-raised-button color="primary" routerLink="/additional">
+      <mat-icon>list</mat-icon>
+      <div>
+        <span class="large">Proceed to Additional Information</span>
+        <span class="small">Next</span>
+      </div>
+    </button>
+  </div>
+</div>

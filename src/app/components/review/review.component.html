@@ -1,0 +1,102 @@
+<div id="wrapper">
+
+  <h3>
+    <mat-icon routerLink="/contact">edit</mat-icon>
+    Contact Information
+  </h3>
+
+  <div id="contact-info">
+    <table>
+      <tr *ngFor="let i of validContactInfo">
+        <td>{{ i.caption }}</td>
+        <td [innerHtml]="getValue('contactInfo', i.name)"></td>
+      </tr>
+    </table>
+
+    <table>
+      <tr *ngFor="let i of validAddressInfo">
+        <td>{{ i.caption }}</td>
+        <td [innerHtml]="getValue('contactInfo', i.name)"></td>
+      </tr>
+    </table>
+  </div>
+
+  <h3>
+    <mat-icon routerLink="/tests">edit</mat-icon>
+    Test Information
+  </h3>
+
+  <div id="tests">
+    <div *ngFor="let test of quoteService.quote.tests; let i=index" class="test">
+      <h4>Test #{{ i+1 }}</h4>
+
+      <div class="test-info">
+        <table *ngFor="let i of validTestInfo(test, false)">
+          <tr>
+            <td>{{ i.caption }}</td>
+            <td [innerHtml]="i.value"></td>
+          </tr>
+        </table>
+      </div>
+
+      <table *ngFor="let i of validTestInfo(test, true)" class="long-test-info">
+        <tr>
+          <td>{{ i.caption }}</td>
+          <td [innerHtml]="i.value"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>
+    <mat-icon routerLink="/additional">edit</mat-icon>
+    Additional Information
+  </h3>
+
+  <div id="additional" *ngIf="hasAdditional">
+    <div id="additional-stuff">
+      <table *ngFor="let i of validAdditionalInfo(false)">
+        <tr>
+          <td>{{ i.caption }}</td>
+          <td [innerHtml]="i.value"></td>
+        </tr>
+      </table>
+    </div>
+
+    <table *ngFor="let i of validAdditionalInfo(true)">
+      <tr>
+        <td>{{ i.caption }}</td>
+        <td [innerHtml]="i.value"></td>
+      </tr>
+    </table>
+
+    <div *ngIf="quoteService.quote.attachments.length > 0">
+      <h4>Attachments</h4>
+
+      <div id="attachments">
+        <div *ngFor="let file of quoteService.quote.attachments">
+          {{ file }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="disclaimer">
+    <span>Please Note:</span>
+    The quoted price for work will be based upon the information you have provided above, any changes to the above work scope may result in a change in the final invoiced price for the job.
+  </div>
+
+  <div id="tos">
+    <a href="http://www.wmtr.com/terms.htm" target="_blank">Click here</a>
+    to View the GENERAL TERMS AND CONDITIONS FOR SERVICES RENDERED BY WESTMORELAND MECHANICAL TESTING & RESEARCH, INC. (WMT&R) - Policy # GTAC 612002-8182010
+  </div>
+
+  <div id="buttons">
+    <button mat-raised-button color="primary" routerLink="/submit">
+      <mat-icon>done</mat-icon>
+      <span class="large">Submit Quote Request</span>
+      <span class="small">Submit</span>
+    </button>
+  </div>
+
+</div>

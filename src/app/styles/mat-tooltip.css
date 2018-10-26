@@ -1,0 +1,4 @@
+::ng-deep .mat-tooltip {
+  font-size: 1em !important;
+  white-space: pre-line;
+}
