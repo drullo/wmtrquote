@@ -4,10 +4,10 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'dist/wmtr-quote')));
+app.use(express.static(path.join(__dirname, 'dist/wmtrquote')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/dist/wmtr-quote/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/wmtrquote/index.html'));
 });
 
 const port = process.env.PORT || 3000;

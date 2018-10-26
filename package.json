@@ -1,5 +1,5 @@
 {
-  "name": "wmtr-quote",
+  "name": "wmtrquote",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy:gh": "ng build --prod --base-href=\"https://drullo.github.io/wmtrquote/\" && ngh -d dist/wmtr-quote -S",
+    "deploy:gh": "ng build --prod --base-href=\"https://drullo.github.io/wmtrquote/\" && ngh -d dist/wmtrquote -S",
     "postinstall": "ng build --prod"
   },
   "private": true,
