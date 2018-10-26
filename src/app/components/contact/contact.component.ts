@@ -9,6 +9,7 @@ import { Country } from '@model/country';
 import { CityService } from '@services/city.service';
 import { EmailErrorStateMatcher } from '@model/email-error-matcher';
 import { QuoteService } from '@services/quote.service';
+import { State } from '@model/state';
 //#endregion
 
 @Component({
@@ -24,9 +25,9 @@ export class ContactComponent implements OnInit {
   matcher = new EmailErrorStateMatcher();
 
   countries: Country[];
-  states: string[];
+  states: State[];
   cities: string[];
-  filteredStates: Observable<string[]>;
+  filteredStates: Observable<State[]>;
   filteredCities: Observable<string[]>;
 
   addressFocused = false; // used to dynamically expand the height when focused
@@ -89,10 +90,30 @@ export class ContactComponent implements OnInit {
   }
   //#endregion
 
+  //#region Events
+  stateFromAbbreviation(): void {
+    const state = this.quoteService.quote.contactInfo.get('state');
+    const value = state.value;
+
+    if (!value || value.toString().length !== 2) {
+      return;
+    }
+
+    const stateLookup = this.states.find(s => s.abbreviation.toLowerCase() === value.toString().toLowerCase());
+
+    if (stateLookup) {
+      state.setValue(stateLookup.name);
+    }
+  }
+  //#endregion
+
   //#region Utilities
-  private stateFilter(value: string): string[] {
+  private stateFilter(value: string): State[] {
     const filterValue = (value || '').toLowerCase();
-    return this.states.filter(s => s.toLowerCase().includes(filterValue));
+
+    return this.states
+      .filter(s => s.name.toLowerCase().includes(filterValue) ||
+        s.abbreviation.toLowerCase().includes(filterValue));
   }
 
   private cityFilter(value: string): string[] {

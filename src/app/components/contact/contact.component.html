@@ -47,12 +47,13 @@
         <!-- State -->
         <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
           <span matPrefix *ngIf="quoteService.outlineFields && hasValue('state')">State</span>
-          <input matInput placeholder="State" formControlName="state" [matAutocomplete]="autoState" />
+          <input matInput placeholder="State" formControlName="state" [matAutocomplete]="autoState"
+            (blur)="stateFromAbbreviation()" />
         </mat-form-field>
         <!-- Autocomplete for State -->
         <mat-autocomplete #autoState="matAutocomplete">
-          <mat-option *ngFor="let state of filteredStates | async" [value]="state">
-            {{ state }}
+          <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
+            {{ state.name }}
           </mat-option>
         </mat-autocomplete>
       </div>
