@@ -9,8 +9,9 @@
 
       <!-- Contact -->
       <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
-          <span matPrefix *ngIf="quoteService.outlineFields && hasValue('contact')">Contact Name</span>
+        <span matPrefix *ngIf="quoteService.outlineFields && hasValue('contact')">Contact Name</span>
         <input matInput placeholder="Contact Name" formControlName="contact" />
+        <mat-error>Contact Name is required</mat-error>
       </mat-form-field>
 
       <!-- Title -->
@@ -80,6 +81,7 @@
       <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
         <span matPrefix>+1 &nbsp;</span>
         <input matInput type="tel" placeholder="Phone Number" formControlName="phone" />
+        <mat-error>Phone Number is required</mat-error>
       </mat-form-field>
 
       <!-- Email -->
@@ -89,6 +91,7 @@
         <mat-error *ngIf="email.hasError('email') && !email.hasError('required')">
           Please enter a valid email address
         </mat-error>
+        <mat-error *ngIf="email.hasError('required') && !email.hasError('email')">Email is required</mat-error>
       </mat-form-field>
     </div>
   </form>

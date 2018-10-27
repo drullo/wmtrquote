@@ -5,6 +5,7 @@
       <span matPrefix *ngIf="quoteService.outlineFields && hasValue('type')">Test Type</span>
       <input matInput placeholder="Test Type" formControlName="type">
       <mat-hint>example: 'Tinsile'</mat-hint>
+      <mat-error>Test Type is required</mat-error>
     </mat-form-field>
 
     <!-- Machining? -->
@@ -50,6 +51,7 @@
         <span matPrefix *ngIf="quoteService.outlineFields && hasValue('material')">Material</span>
         <input matInput placeholder="Material" formControlName="material" />
         <mat-hint>example: 'Aluminum'</mat-hint>
+        <mat-error>Material is required</mat-error>
       </mat-form-field>
 
       <!-- Material hardness -->
@@ -65,6 +67,7 @@
       <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
         <span matPrefix *ngIf="quoteService.outlineFields && hasValue('samples')">Number of Samples</span>
         <input matInput type="number" placeholder="Number of Samples" formControlName="samples" />
+        <mat-error>Number of Samples is required</mat-error>
       </mat-form-field>
 
       <div id="temp">
@@ -72,7 +75,6 @@
         <mat-form-field [appearance]="quoteService.outlineFields ? 'outline' : 'legacy'">
           <span matPrefix *ngIf="quoteService.outlineFields && hasValue('temp')">Temperature</span>
           <input matInput placeholder="Temperature" formControlName="temp" />
-          <mat-hint>example: 'Aluminum'</mat-hint>
         </mat-form-field>
 
         <mat-radio-group formControlName="tempScale">

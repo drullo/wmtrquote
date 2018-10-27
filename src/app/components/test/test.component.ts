@@ -68,7 +68,9 @@ export class TestComponent implements OnInit {
       this.tests.push(new TestForm());
     }
 
-    const testNum = this.editNum || this.tests.length;
+    const testNum = this.editNum === -1 ?
+      this.tests.length :
+      this.editNum + 1;
     this.quoteService.currentStep = `Test #${testNum} Specification`;
     this.quoteService.currentStepNum = 2;
 
